@@ -1,5 +1,6 @@
 <script>
     import { stateStore } from '../store.js';
+    import { weather } from "../config.js";
     import '../css/weather-icons.min.css'
 
     const CONDITION_PICTURES = {
@@ -18,8 +19,8 @@
 
 <div class="weather">
     {#if $stateStore !== null}
-        <i class={'wi ' + CONDITION_PICTURES[$stateStore['sensor.dark_sky_icon'].state]}/>
-        {$stateStore['sensor.rounded_temp'].state}&deg;
+        <i class={'wi ' + CONDITION_PICTURES[$stateStore[weather.icon].state]}/>
+        {$stateStore[weather.temperature_sensor].state}&deg;
     {/if}
 </div>
 
