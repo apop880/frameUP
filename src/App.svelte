@@ -17,6 +17,7 @@
 <style>
 	:global(body) {
 		background-color: rgb(51, 51, 51);
+		overflow-y: hidden;
 	}
 
 	main {
