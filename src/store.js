@@ -33,7 +33,9 @@ export const stateStore = readable(null, function start(set) {
 });
 
 
-export const action = (data) => 
-	callService(conn, data[0], data[1], null, {
-		entity_id: data[2]
+export const action = (serviceType, target) => {
+	let [domain, service] = serviceType.split('.');
+	callService(conn, domain, service, null, {
+		entity_id: target
 	});
+}
