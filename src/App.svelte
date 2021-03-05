@@ -2,12 +2,16 @@
 	import { stateStore, action } from './store.js'
 	import BackgroundSlideshow from './components/slideshow.svelte'
 	import Topbar from './components/topbar.svelte';
+	import Notifications from './components/notifications.svelte';
 </script>
 
 <main>
 	<Topbar />
 	
 </main>
+{#if $stateStore !== null}
+<Notifications />
+{/if}
 <BackgroundSlideshow />
 
 <style>
