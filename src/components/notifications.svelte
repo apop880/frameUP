@@ -1,9 +1,9 @@
 <script>
     import { stateStore, action } from '../store.js';
     import { notifications } from '../config.js';
-    import { crossfade } from 'svelte/transition';
+    import { fly, fade } from 'svelte/transition';
     import { flip } from 'svelte/animate';
-    import { backInOut, quintOut } from 'svelte/easing';
+    import { backInOut } from 'svelte/easing';
     import { spring } from 'svelte/motion';
     
     let size = spring(1);
@@ -17,24 +17,6 @@
         return res;
     }
 
-    const [send, receive] = crossfade({
-		duration: d => Math.sqrt(d * 200),
-
-		fallback(node, params) {
-			const style = getComputedStyle(node);
-			const transform = style.transform === 'none' ? '' : style.transform;
-
-			return {
-				duration: 600,
-				easing: quintOut,
-				css: t => `
-					transform: ${transform} scale(${t});
-					opacity: ${t}
-				`
-			};
-		}
-	});
-
     let notiObj;
 
     $: {    
@@ -47,17 +29,17 @@
 <div class="notifications">
     {#each notiObj as noti, index(noti)}
         <button class="notiButton"
-            in:receive="{{key: noti.entity_id}}"
-            out:send="{{key: noti.entity_id}}"
-            animate:flip="{{duration: 400, delay: 500, easing: backInOut}}"
-            on:touchstart={() => size.set(1.05)}
-            on:touchend={() => size.set(1)}
+            in:fly="{{ y: -200, duration: 500 }}"
+            out:fade="{{ delay: 400 }}"
+            animate:flip="{{duration: 400, delay: 1000, easing: backInOut}}"
             on:click="{() => {
                 if('service' in notifications[noti.entity_id]) {
                     handleClick(notifications[noti.entity_id]);
                 }
             }}"
-            style="transform: scale3d({$size},{$size},{$size})">
+            on:touchstart="{() => size.set(1.1)}"
+            on:touchend="{() => size.set(1)}"
+            style="transform: scale({$size})">
                 <div>icon</div>
                 {#if 'text' in notifications[noti.entity_id]}
                 <div>{notifications[noti.entity_id].text}</div>
@@ -89,8 +71,6 @@
         display: grid;
 		grid-template-columns: min-content 1fr;
         column-gap: 10px;
-        transform-origin: left top;
-        -webkit-transform-origin: left top;
         justify-items: start;
     }
 </style>
