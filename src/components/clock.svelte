@@ -19,8 +19,10 @@
 </script>
 
 <div class="clock">
+    {#if date}
     {time[0]}<span class="am-pm">{time[1]}</span><br />
     <span class="date">{date}</span>
+    {/if}
 </div>
 
 <style>
