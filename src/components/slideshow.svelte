@@ -1,33 +1,41 @@
 <script>
     import { fade } from 'svelte/transition'
+    import { onMount, onDestroy } from 'svelte';
 
     let x = 2;
     let images = [];
     let imgA = ''
     let imgB = ''
     let showA = true;
-    fetch('slideshow.json')
-        .then(Response => Response.json())
-        .then(data => {
-            images = data;
-            imgA = images[0];
-            imgB = images[1];
-        })
 
-    setInterval(() => {
-        if(showA) {
-            showA = !showA;
-            setTimeout(() => { imgA = images[x]; }, 5000)
-        }
-        else {
-            showA = !showA;
-            setTimeout(() => { imgB = images[x]; }, 5000)
-        }
-        x++;
-        if(x > images.length-1) {
-            x = 0;
-        }
-    }, 30000);
+    onMount(() => {
+        fetch('slideshow.json')
+            .then(Response => Response.json())
+            .then(data => {
+                images = data;
+                imgA = images[0];
+                imgB = images[1];
+            })
+
+        const rotator = setInterval(() => {
+            if(showA) {
+                showA = !showA;
+                setTimeout(() => { imgA = images[x]; }, 5000)
+            }
+            else {
+                showA = !showA;
+                setTimeout(() => { imgB = images[x]; }, 5000)
+            }
+            x++;
+            if(x > images.length-1) {
+                x = 0;
+            }
+        }, 30000);
+    })
+
+    onDestroy(() => {
+        clearInterval(rotator);
+    })
 </script>
 
 <style>
@@ -54,8 +62,8 @@
 
 <div id="backgroundSlider">
     {#if showA && imgA !== ''}
-    <div transition:fade="{{delay: 1000, duration: 1000}}"  class="image" style="background-image: url({imgA})"></div>
+    <div transition:fade="{{delay: 2000, duration: 1000}}"  class="image" style="background-image: url({imgA})"></div>
     {:else if imgB !== ''}
-    <div transition:fade="{{delay: 1000, duration: 1000}}" class="image" style="background-image: url({imgB})"></div>
+    <div transition:fade="{{delay: 2000, duration: 1000}}" class="image" style="background-image: url({imgB})"></div>
     {/if}
 </div>
