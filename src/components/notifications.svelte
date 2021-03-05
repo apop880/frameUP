@@ -12,6 +12,11 @@
         action(cfg.service, cfg.target)
     }
 
+    function render_template(template) {
+        let res = template.template_text.replace('%', $stateStore[template.template_entity].state);
+        return res;
+    }
+
     const [send, receive] = crossfade({
 		duration: d => Math.sqrt(d * 200),
 
@@ -54,7 +59,11 @@
             }}"
             style="transform: scale3d({$size},{$size},{$size})">
                 <div>icon</div>
+                {#if 'text' in notifications[noti.entity_id]}
                 <div>{notifications[noti.entity_id].text}</div>
+                {:else if 'template_text' in notifications[noti.entity_id]}
+                <div>{render_template(notifications[noti.entity_id])}</div>
+                {/if}
         </button>
     {/each}
 </div>
