@@ -1,3 +1,6 @@
+import lightbulbLine from '@iconify-icons/ri/lightbulb-line';
+import Light from './components/cards/light.svelte';
+
 export const weather = {
     temperature_sensor: "sensor.rounded_temp",
     icon: 'sensor.dark_sky_icon'
@@ -15,3 +18,14 @@ export const tasks = {
     'input_boolean.nina_meds': {text: 'Nina needs her pill'},
     'input_boolean.trash': {text: 'Put out trash and recyling'}
 }
+
+export const views = [
+    {
+        name: 'lights',
+        icon: lightbulbLine,
+        config: [
+            {card: Light, config: {entity: 'light.kitchen_table', name: 'Kitchen Table', icon: lightbulbLine}},
+            {card: Light, config: {entity: 'light.kitchen_can_light_switch', name: 'Kitchen Can Lights', icon: lightbulbLine}}
+        ]
+    }
+]

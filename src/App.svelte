@@ -5,17 +5,53 @@
 	import Notifications from './components/notifications.svelte';
 	import Tasks from './components/tasks.svelte';
 	import LoadingModal from './components/loadingmodal.svelte';
+	import Menu from './components/menu.svelte';
+	import View from './components/view.svelte';
+	import { views } from './config.js';
+
+	let curView = null;
+	let showMenu = false;
+	let timer;
+
+	function mainClick() {
+		clearTimeout(timer);
+		showMenu = true;
+		timer = setTimeout(() => {
+			showMenu = false;
+			curView = null;
+		}, 30000)
+	}
+
+	function handleMessage(e) {
+		clearTimeout(timer);
+		if(curView === e.detail.newView) {
+			curView = null;
+			timer = setTimeout(() => showMenu = false, 3000)
+		}
+		else {
+			timer = setTimeout(() => {
+				showMenu = false;
+				curView = null;
+			}, 30000)
+			curView = e.detail.newView;
+		}
+	}
 </script>
 
-<main>
+<main on:click="{() => mainClick()}">
 	<Topbar />
-	
+	{#if curView !== null}
+		<View config={views[curView].config} />
+	{/if}
 </main>
 {#if $stateStore !== null}
-<Notifications />
-<Tasks />
+	<Notifications />
+	<Tasks />
+	{#if showMenu}
+		<Menu on:message={handleMessage} curView={curView} />
+	{/if}
 {:else}
-<LoadingModal />
+	<LoadingModal />
 {/if}
 <BackgroundSlideshow />
 
