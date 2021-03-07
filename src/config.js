@@ -10,3 +10,8 @@ export const notifications = {
     'binary_sensor.upstairs_back_door': {state: 'on', text: 'Upstairs Back Door is open'},
     'cover.garage_door': {state: 'open', text: 'Garage Door is open - tap to close', service: 'cover.close', target: 'cover.garage_door'}
 }
+
+export const tasks = {
+    'input_boolean.nina_meds': {text: 'Nina needs her pill'},
+    'input_boolean.trash': {text: 'Put out trash and recyling'}
+}

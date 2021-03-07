@@ -3,6 +3,8 @@
 	import BackgroundSlideshow from './components/slideshow.svelte'
 	import Topbar from './components/topbar.svelte';
 	import Notifications from './components/notifications.svelte';
+	import Tasks from './components/tasks.svelte';
+	import LoadingModal from './components/loadingmodal.svelte';
 </script>
 
 <main>
@@ -11,6 +13,9 @@
 </main>
 {#if $stateStore !== null}
 <Notifications />
+<Tasks />
+{:else}
+<LoadingModal />
 {/if}
 <BackgroundSlideshow />
 
