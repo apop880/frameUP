@@ -13,7 +13,7 @@
     }
 
     function render_template(template) {
-        let res = template.template_text.replace('%', $stateStore[template.template_entity].state);
+        let res = template.template_text.replace('%%', $stateStore[template.template_entity].state);
         return res;
     }
 
