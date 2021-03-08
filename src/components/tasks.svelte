@@ -5,6 +5,7 @@
     import { flip } from 'svelte/animate';
     import { backInOut } from 'svelte/easing';
     import { spring } from 'svelte/motion';
+    import IconifyIcon from '@iconify/svelte';
     
     let size = spring(1);
 
@@ -32,7 +33,7 @@
             on:touchstart="{() => size.set(1.1)}"
             on:touchend="{() => size.set(1)}"
             style="transform: scale({$size})">
-                <div>icon</div>
+                <div><IconifyIcon icon="{tasks[task.entity_id].icon}" height="38" /></div>
                 {#if 'text' in tasks[task.entity_id]}
                 <div>{tasks[task.entity_id].text}</div>
                 {:else if 'template_text' in tasks[task.entity_id]}
@@ -54,15 +55,16 @@
     .taskButton {
         background-color: rgba(158, 153, 153, 0.825);
         border-radius: 20px;
-        padding: 10px;
+        padding: 8px;
         margin-top: 10px;
         width: 340px;
         border: 0;
         font-size: 1em;
         outline-style: none;
         display: grid;
-		grid-template-columns: min-content 1fr;
+		grid-template-columns: 50px 1fr;
         column-gap: 10px;
         justify-items: start;
+        align-items: center;
     }
 </style>

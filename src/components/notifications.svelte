@@ -70,7 +70,7 @@
         font-size: 1em;
         outline-style: none;
         display: grid;
-		grid-template-columns: min-content 1fr;
+		grid-template-columns: 50px 1fr;
         column-gap: 10px;
         justify-items: start;
         align-items: center;

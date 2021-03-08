@@ -3,6 +3,8 @@ import sceneryIcon from '@iconify-icons/uim/scenery';
 import bxCameraMovie from '@iconify-icons/bx/bx-camera-movie';
 import bxsDoorOpen from '@iconify-icons/bx/bxs-door-open';
 import garageOpenVariant from '@iconify-icons/mdi/garage-open-variant';
+import dogIcon from '@iconify-icons/fa-solid/dog';
+import trashAlt from '@iconify-icons/fa-solid/trash-alt';
 
 import Light from './components/cards/light.svelte';
 import Scene from './components/cards/scene.svelte';
@@ -26,8 +28,8 @@ export const notifications = {
 }
 
 export const tasks = {
-    'input_boolean.nina_meds': {text: 'Nina needs her pill'},
-    'input_boolean.trash': {text: 'Put out trash and recyling'}
+    'input_boolean.nina_meds': {text: 'Nina needs her pill', icon: dogIcon},
+    'input_boolean.trash': {text: 'Put out trash and recyling', icon: trashAlt}
 }
 
 export const views = [
