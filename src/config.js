@@ -6,7 +6,7 @@ import garageOpenVariant from '@iconify-icons/mdi/garage-open-variant';
 
 import Light from './components/cards/light.svelte';
 import Scene from './components/cards/scene.svelte';
-import Blank from './components/cards/blank.svelte';
+import Break from './components/cards/break.svelte';
 
 export const weather = {
     temperature_sensor: "sensor.rounded_temp",
@@ -40,19 +40,15 @@ export const views = [
                 {card: Scene, config: {scene: 'light.kitchen_table', name: 'Upstairs Lights Off', icon: sceneryIcon}},
                 {card: Scene, config: {scene: 'light.kitchen_table', name: 'All Lights Off', icon: sceneryIcon}},
                 {card: Scene, config: {scene: 'light.kitchen_table', name: 'Movie Lighting', icon: bxCameraMovie}},
-                {card: Blank},
+                {card: Break},
                 {card: Light, config: {entity: 'light.kitchen_table', name: 'Kitchen Table', icon: lightbulbLine}},
-                //{card: Blank, config: {span: 3}},
                 {card: Light, config: {entity: 'light.kitchen_can_light_switch', name: 'Kitchen Can Lights', icon: lightbulbLine}},
-                {card: Blank},
-                {card: Blank},
+                {card: Break},
                 {card: Light, config: {entity: 'light.living_can_lights', name: 'Living Room Can Lights', icon: lightbulbLine}},
                 {card: Light, config: {entity: 'light.living_room_fan_light', name: 'Living Room Fan Light', icon: lightbulbLine}},
-                {card: Blank},
-                {card: Blank},
+                {card: Break},
                 {card: Light, config: {entity: 'light.chandelier', name: 'Chandelier', icon: lightbulbLine}},
                 {card: Light, config: {entity: 'light.dining_lamp', name: 'Dining Room Lamp', icon: lightbulbLine}},
-                {card: Blank}
             ]},
             {width: '2fr', justify: 'end', config: [/*
                 {card: Blank},

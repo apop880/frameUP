@@ -32,10 +32,9 @@
     }
 
     .section {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        align-content: flex-start;
-        row-gap: 10px;
-        column-gap: 10px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        align-self: start;
     }
 </style>
