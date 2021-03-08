@@ -23,12 +23,18 @@
         CurrentWeather
     ]
 
+    let timer;
+
     function toggleForecast() {
+        clearTimeout(timer);
         if (componentArray.length === 2) {
             componentArray = componentArray.filter(c => c === CurrentWeather);
         }
         else {
             componentArray = [...componentArray, Forecast];
+            timer = setTimeout(() => {
+                toggleForecast();
+            }, 30000)
         }
     }
 </script>
