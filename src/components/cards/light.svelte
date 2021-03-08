@@ -14,7 +14,7 @@
     }
 </script>
 
-<button class:on={entityObj.state === "on"} class:off={entityObj.state === "off"} on:click="{() => action('light.toggle', config.entity)}"
+<button class:on={entityObj.state === "on"} class:off={entityObj.state === "off"} style="grid-row: {config.row}; grid-column:{config.col}" on:click="{() => action('light.toggle', config.entity)}"
     transition:fly="{{ y: 80, duration: 700, delay: 150*delay, easing: elasticInOut }}">
         <div class="icon"><IconifyIcon icon="{config.icon}" height="38" /></div>
         <div class="name">{config.name}</div>    
@@ -24,8 +24,9 @@
     button {
         width: 180px;
         height: 70px;
-        background-color: rgba(158, 153, 153, 0.825);
-        border: 0;
+        background-color: rgba(46, 45, 45, 0.825);
+        color:white;
+        border: 1 px grey solid;
         border-radius: 20px;
         padding: 10px;
         margin-top: 10px;

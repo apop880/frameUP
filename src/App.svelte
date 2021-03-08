@@ -41,7 +41,7 @@
 <main on:click="{() => mainClick()}">
 	<Topbar />
 	{#if curView !== null}
-		<View config={views[curView].config} />
+		<View sections={views[curView].sections} />
 	{/if}
 </main>
 {#if $stateStore !== null}

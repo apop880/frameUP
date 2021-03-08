@@ -23,9 +23,16 @@ export const views = [
     {
         name: 'lights',
         icon: lightbulbLine,
-        config: [
-            {card: Light, config: {entity: 'light.kitchen_table', name: 'Kitchen Table', icon: lightbulbLine}},
-            {card: Light, config: {entity: 'light.kitchen_can_light_switch', name: 'Kitchen Can Lights', icon: lightbulbLine}}
+        sections: [
+            {width: '3fr', justify: 'start', config: [
+                {card: Light, config: {entity: 'light.kitchen_table', name: 'Kitchen Table', icon: lightbulbLine, row: 1, col: 1}},
+                {card: Light, config: {entity: 'light.kitchen_can_light_switch', name: 'Kitchen Can Lights', icon: lightbulbLine, row: 1, col: 2}},
+                {card: Light, config: {entity: 'light.kitchen_can_light_switch', name: 'Kitchen Can Lights', icon: lightbulbLine, row: 2, col: 1}}
+            ]},
+            {width: '1fr', justify: 'end', config: [
+                {card: Light, config: {entity: 'light.kitchen_table', name: 'Kitchen Table', icon: lightbulbLine, row: 1, col: 2}},
+                {card: Light, config: {entity: 'light.kitchen_can_light_switch', name: 'Kitchen Can Lights', icon: lightbulbLine}}
+            ]}
         ]
     }
 ]
