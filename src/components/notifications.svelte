@@ -5,6 +5,7 @@
     import { flip } from 'svelte/animate';
     import { backInOut } from 'svelte/easing';
     import { spring } from 'svelte/motion';
+    import IconifyIcon from '@iconify/svelte';
     
     let size = spring(1);
 
@@ -40,7 +41,7 @@
             on:touchstart="{() => size.set(1.1)}"
             on:touchend="{() => size.set(1)}"
             style="transform: scale({$size})">
-                <div>icon</div>
+                <div><IconifyIcon icon="{notifications[noti.entity_id].icon}" height="38" /></div>
                 {#if 'text' in notifications[noti.entity_id]}
                 <div>{notifications[noti.entity_id].text}</div>
                 {:else if 'template_text' in notifications[noti.entity_id]}
@@ -62,7 +63,7 @@
     .notiButton {
         background-color: rgba(158, 153, 153, 0.825);
         border-radius: 20px;
-        padding: 10px;
+        padding: 8px;
         margin-top: 10px;
         width: 340px;
         border: 0;
@@ -72,5 +73,6 @@
 		grid-template-columns: min-content 1fr;
         column-gap: 10px;
         justify-items: start;
+        align-items: center;
     }
 </style>
