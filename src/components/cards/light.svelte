@@ -14,8 +14,8 @@
     }
 </script>
 
-<button class:on={entityObj.state === "on"} class:off={entityObj.state === "off"} style="grid-row: {config.row}; grid-column:{config.col}" on:click="{() => action('light.toggle', config.entity)}"
-    transition:fly="{{ y: 80, duration: 700, delay: 150*delay, easing: elasticInOut }}">
+<button class:on={entityObj.state === "on"} class:off={entityObj.state === "off"} on:click="{() => action('light.toggle', config.entity)}"
+    transition:fly="{{ y: 80, duration: 700, delay: delay, easing: elasticInOut }}">
         <div class="icon"><IconifyIcon icon="{config.icon}" height="38" /></div>
         <div class="name">{config.name}</div>    
 </button>
@@ -39,7 +39,7 @@
     }
 
     .on {
-        box-shadow: 0px 0px 15px 3px rgb(202 199 18 / 70%);
+        box-shadow: 0px 0px 15px 5px rgb(202 199 18 / 85%);
         transition: 0.5s;
     }
 
