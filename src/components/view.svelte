@@ -16,7 +16,7 @@
     {#each sections as section, index}
         <div class="section" style="justify-content:{section.justify}">
             {#each section.config as item, sIndex}
-                <svelte:component this={item.card} config={item.config} delay={sIndex}/>
+                <svelte:component this={item.card} config={item.config} delay={25*sIndex}/>
             {/each}
         </div>
     {/each}
@@ -26,16 +26,16 @@
     .view {
         display: grid;
         grid-auto-flow: column;
-        column-gap: 10px;
+        column-gap: 25px;
         grid-template-columns: var(--columns);
         margin: 10px;
     }
 
     .section {
         display: grid;
-        column-gap: 15px;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        align-content: flex-start;
         row-gap: 10px;
-        grid-auto-columns: max-content;
-        grid-auto-rows: min-content;
+        column-gap: 10px;
     }
 </style>
