@@ -50,7 +50,7 @@ export const views = [
                 {card: Light, config: {entity: 'light.chandelier', name: 'Chandelier', icon: lightbulbLine}},
                 {card: Light, config: {entity: 'light.dining_lamp', name: 'Dining Room Lamp', icon: lightbulbLine}},
             ]},
-            {width: '2fr', justify: 'end', config: [/*
+            {width: '1fr', justify: 'end', config: [/*
                 {card: Blank},
                 {card: Light, config: {entity: 'light.kitchen_table', name: 'Kitchen Table', icon: lightbulbLine}},
                 {card: Light, config: {entity: 'light.kitchen_can_light_switch', name: 'Kitchen Can Lights', icon: lightbulbLine}}

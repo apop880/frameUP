@@ -16,9 +16,9 @@
 
 <style>
     button {
-        width: 220px;
+        width: 180px;
         height: 70px;
-        background-color: rgba(170, 170, 170, 0.904);
+        background-color: rgba(216, 212, 212, 0.904);
         color:rgb(51, 51, 51);
         border: 1 px grey solid;
         border-radius: 20px;
