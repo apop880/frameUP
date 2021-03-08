@@ -1,18 +1,28 @@
 import lightbulbLine from '@iconify-icons/ri/lightbulb-line';
+import sceneryIcon from '@iconify-icons/uim/scenery';
+import bxCameraMovie from '@iconify-icons/bx/bx-camera-movie';
+import bxsDoorOpen from '@iconify-icons/bx/bxs-door-open';
+import garageOpenVariant from '@iconify-icons/mdi/garage-open-variant';
+
 import Light from './components/cards/light.svelte';
 import Scene from './components/cards/scene.svelte';
+import Blank from './components/cards/blank.svelte';
 
 export const weather = {
     temperature_sensor: "sensor.rounded_temp",
-    icon: 'sensor.dark_sky_icon'
+    icon: 'sensor.dark_sky_icon',
+    forecast: [{icon: 'sensor.dark_sky_icon_0d', high: 'sensor.dark_sky_daytime_high_temperature_0d', low: 'sensor.dark_sky_overnight_low_temperature_0d'},
+        {icon: 'sensor.dark_sky_icon_1d', high: 'sensor.dark_sky_daytime_high_temperature_1d', low: 'sensor.dark_sky_overnight_low_temperature_1d'},
+        {icon: 'sensor.dark_sky_icon_2d', high: 'sensor.dark_sky_daytime_high_temperature_2d', low: 'sensor.dark_sky_overnight_low_temperature_2d'}
+    ]
 };
 
 export const notifications = {
-    'binary_sensor.downstairs_back_door': {state: 'on', text: 'Downstairs Back Door is open'},
-    'binary_sensor.front_door': {state: 'on', text: 'Front Door is open'},
-    'binary_sensor.garage_entry_door': {state: 'on', text: 'Garage Entry Door is open'},
-    'binary_sensor.upstairs_back_door': {state: 'on', text: 'Upstairs Back Door is open'},
-    'cover.garage_door': {state: 'open', text: 'Garage Door is open - tap to close', service: 'cover.close', target: 'cover.garage_door'}
+    'binary_sensor.downstairs_back_door': {state: 'on', text: 'Downstairs Back Door is open', icon: bxsDoorOpen},
+    'binary_sensor.front_door': {state: 'on', text: 'Front Door is open', icon: bxsDoorOpen},
+    'binary_sensor.garage_entry_door': {state: 'on', text: 'Garage Entry Door is open', icon: bxsDoorOpen},
+    'binary_sensor.upstairs_back_door': {state: 'on', text: 'Upstairs Back Door is open', icon: bxsDoorOpen},
+    'cover.garage_door': {state: 'open', text: 'Garage Door is open - tap to close', service: 'cover.close', target: 'cover.garage_door', icon: garageOpenVariant}
 }
 
 export const tasks = {
@@ -26,18 +36,29 @@ export const views = [
         icon: lightbulbLine,
         sections: [
             {width: '3fr', justify: 'start', config: [
-                {card: Scene, config: {scene: 'light.kitchen_table', name: 'Upstairs Lights On', icon: lightbulbLine, row: 1, col: 1}},
-                {card: Scene, config: {scene: 'light.kitchen_table', name: 'Upstairs Lights Off', icon: lightbulbLine, row: 1, col: 2}},
-                {card: Scene, config: {scene: 'light.kitchen_table', name: 'All Lights Off', icon: lightbulbLine, row: 1, col: 3}},
-                {card: Scene, config: {scene: 'light.kitchen_table', name: 'Movie Lighting', icon: lightbulbLine, row: 1, col: 4}},
-                {card: Light, config: {entity: 'light.kitchen_table', name: 'Kitchen Table', icon: lightbulbLine, row: 2, col: 1}},
-                {card: Light, config: {entity: 'light.kitchen_can_light_switch', name: 'Kitchen Can Lights', icon: lightbulbLine, row: 2, col: 2}},
-                {card: Light, config: {entity: 'light.kitchen_can_light_switch', name: 'Kitchen Can Lights', icon: lightbulbLine, row: 2, col: 3}}
+                {card: Scene, config: {scene: 'light.kitchen_table', name: 'Upstairs Lights On', icon: sceneryIcon}},
+                {card: Scene, config: {scene: 'light.kitchen_table', name: 'Upstairs Lights Off', icon: sceneryIcon}},
+                {card: Scene, config: {scene: 'light.kitchen_table', name: 'All Lights Off', icon: sceneryIcon}},
+                {card: Scene, config: {scene: 'light.kitchen_table', name: 'Movie Lighting', icon: bxCameraMovie}},
+                {card: Blank},
+                {card: Light, config: {entity: 'light.kitchen_table', name: 'Kitchen Table', icon: lightbulbLine}},
+                //{card: Blank, config: {span: 3}},
+                {card: Light, config: {entity: 'light.kitchen_can_light_switch', name: 'Kitchen Can Lights', icon: lightbulbLine}},
+                {card: Blank},
+                {card: Blank},
+                {card: Light, config: {entity: 'light.living_can_lights', name: 'Living Room Can Lights', icon: lightbulbLine}},
+                {card: Light, config: {entity: 'light.living_room_fan_light', name: 'Living Room Fan Light', icon: lightbulbLine}},
+                {card: Blank},
+                {card: Blank},
+                {card: Light, config: {entity: 'light.chandelier', name: 'Chandelier', icon: lightbulbLine}},
+                {card: Light, config: {entity: 'light.dining_lamp', name: 'Dining Room Lamp', icon: lightbulbLine}},
+                {card: Blank}
             ]},
-            {width: '2fr', justify: 'end', config: [
-                {card: Light, config: {entity: 'light.kitchen_table', name: 'Kitchen Table', icon: lightbulbLine, row: 1, col: 1}},
-                {card: Light, config: {entity: 'light.kitchen_can_light_switch', name: 'Kitchen Can Lights', icon: lightbulbLine, row: 1, col: 2}}
-            ]}
+            {width: '2fr', justify: 'end', config: [/*
+                {card: Blank},
+                {card: Light, config: {entity: 'light.kitchen_table', name: 'Kitchen Table', icon: lightbulbLine}},
+                {card: Light, config: {entity: 'light.kitchen_can_light_switch', name: 'Kitchen Can Lights', icon: lightbulbLine}}
+            */]}
         ]
     }
 ]
