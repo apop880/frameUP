@@ -28,7 +28,7 @@
         grid-auto-flow: column;
         column-gap: 10px;
         grid-template-columns: var(--columns);
-        margin: 0 10px;
+        margin: 10px;
     }
 
     .section {
