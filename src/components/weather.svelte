@@ -20,7 +20,7 @@
     }
 
     let componentArray = [
-        Currentweather
+        CurrentWeather
     ]
 
     function toggleForecast() {
