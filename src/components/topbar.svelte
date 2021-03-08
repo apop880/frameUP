@@ -6,7 +6,6 @@
 <div class="container">
     <Clock />
     <Weather />
-    <div></div>
 </div>
 
 
@@ -19,5 +18,6 @@
         grid-template-areas:
             ". . .";
         color: white;
+        margin: 0 35px;
     }
 </style>

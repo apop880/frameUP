@@ -5,6 +5,7 @@
     import CurrentWeather from './currentweather.svelte';
     import Forecast from './forecast.svelte';
     import '../css/weather-icons.min.css';
+import Currentweather from './currentweather.svelte';
 
     const CONDITION_PICTURES = {
         "clear-day": "wi-day-sunny",
@@ -24,17 +25,25 @@
         {component: Forecast, show: false}
     ];
 
+    let componentArray = [
+        Currentweather
+    ]
+
     function toggleForecast() {
-        components[1].show = !components[1].show;
+        //components[1].show = !components[1].show;
+        if (componentArray.length === 2) {
+            componentArray = componentArray.filter(c => c === CurrentWeather);
+        }
+        else {
+            componentArray = [...componentArray, Forecast];
+        }
     }
 </script>
 
 {#if $stateStore !== null}
-{#each components as component, key(component)}
+{#each componentArray as component, key(component)}
 <div animate:flip="{{duration: 400, easing: backIn}}" style="justify-self:end;">
-{#if component.show}
-<svelte:component this={component.component} on:click="{() => toggleForecast()}" {CONDITION_PICTURES} />
-{/if}
+<svelte:component this={component} on:click="{() => toggleForecast()}" {CONDITION_PICTURES} />
 </div>
 {/each}
 {/if}
