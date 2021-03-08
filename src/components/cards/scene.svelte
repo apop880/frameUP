@@ -8,8 +8,8 @@
     export let delay;
 </script>
 
-<button style="grid-row: {config.row}; grid-column:{config.col}" on:click="{() => action('scene.activate', config.scene)}"
-    transition:fly="{{ y: 80, duration: 700, delay: 150*delay, easing: elasticInOut }}">
+<button on:click="{() => action('scene.activate', config.scene)}"
+    transition:fly="{{ y: 80, duration: 700, delay: delay, easing: elasticInOut }}">
         <div class="icon"><IconifyIcon icon="{config.icon}" height="38" /></div>
         <div class="name">{config.name}</div>    
 </button>
@@ -18,7 +18,7 @@
     button {
         width: 220px;
         height: 70px;
-        background-color: rgba(133, 133, 133, 0.825);
+        background-color: rgba(170, 170, 170, 0.904);
         color:rgb(51, 51, 51);
         border: 1 px grey solid;
         border-radius: 20px;
@@ -31,7 +31,7 @@
         align-self: center;
         align-items: center;
     }
-    
+
     .icon {
         grid-area: icon;
     }
