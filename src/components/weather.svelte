@@ -5,7 +5,6 @@
     import CurrentWeather from './currentweather.svelte';
     import Forecast from './forecast.svelte';
     import '../css/weather-icons.min.css';
-import Currentweather from './currentweather.svelte';
 
     const CONDITION_PICTURES = {
         "clear-day": "wi-day-sunny",
@@ -20,17 +19,11 @@ import Currentweather from './currentweather.svelte';
         "partly-cloudy-night": "wi-night-alt-cloudy"
     }
 
-    const components = [
-        {component: CurrentWeather, show: true},
-        {component: Forecast, show: false}
-    ];
-
     let componentArray = [
         Currentweather
     ]
 
     function toggleForecast() {
-        //components[1].show = !components[1].show;
         if (componentArray.length === 2) {
             componentArray = componentArray.filter(c => c === CurrentWeather);
         }
