@@ -22,7 +22,7 @@
 
 <style>
     button {
-        width: 180px;
+        width: 220px;
         height: 70px;
         background-color: rgba(46, 45, 45, 0.825);
         color:white;
