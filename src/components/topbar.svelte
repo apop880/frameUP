@@ -18,6 +18,6 @@
         grid-template-areas:
             ". . .";
         color: white;
-        margin: 0 35px;
+        margin: 5px 35px;
     }
 </style>

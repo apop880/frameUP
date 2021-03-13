@@ -1,40 +1,81 @@
 <script>
-    export let sections;
+    import Grid from "svelte-grid";
+    import gridHelp from "svelte-grid/build/helper/index.mjs";
 
-    let cssVarStyles='--columns:';
-	
-	$: {
-        for(const item in sections) {
-            console.log(sections[item].width);
-            cssVarStyles = cssVarStyles + ' ' + sections[item].width;
-        }
-        console.log(cssVarStyles);
-    }
+    import Light from "./cards/light.svelte";
+    import Button from "./cards/button.svelte";
+
+    const { item } = gridHelp;
+
+    const id = () => "_" + Math.random().toString(36).substr(2, 9);
+
+    let items = [
+        {
+            id: id(),
+            5: item({
+                x: 0,
+                y: 0,
+                w: 2,
+                h: 2,
+            }),
+            3: item({ x: 0, w: 2, h: 2, y: 0 }),
+            1: item({ x: 0, y: 0, w: 1, h: 2 }),
+        },
+
+        {
+            id: id(),
+            5: item({
+                x: 2,
+                y: 0,
+                w: 3,
+                h: 2,
+            }),
+            3: item({ x: 2, w: 1, h: 2, y: 0 }),
+            1: item({ x: 0, y: 2, w: 1, h: 2 }),
+        },
+
+        {
+            id: id(),
+            5: item({
+                x: 0,
+                y: 2,
+                w: 5,
+                h: 2,
+            }),
+            3: item({ x: 0, w: 3, h: 2, y: 2 }),
+            1: item({ x: 0, y: 4, w: 1, h: 2 }),
+        },
+    ];
+
+    const cols = [
+        [1400, 5],
+        [800, 4],
+        [500, 1],
+    ];
 </script>
 
-<div class="view" style="{cssVarStyles}">
-    {#each sections as section, index}
-        <div class="section" style="justify-content:{section.justify}">
-            {#each section.config as item, sIndex}
-                <svelte:component this={item.card} config={item.config} delay={25*sIndex}/>
-            {/each}
+<div class="demo-container">
+    <Grid bind:items rowHeight={100} let:item {cols} let:index>
+        <div class="demo-widget content">
+            <h3>{index}</h3>
         </div>
-    {/each}
+    </Grid>
 </div>
 
 <style>
-    .view {
-        display: grid;
-        grid-auto-flow: column;
-        column-gap: 25px;
-        grid-template-columns: var(--columns);
-        margin: 10px;
+    .demo-widget {
+        background: #f1f1f1;
+        height: 100%;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
-    .section {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        align-self: start;
+    .demo-container {
+        max-width: 1400px;
+        width: 100%;
+        justify-self: center;
+        overflow-y: scroll;
     }
 </style>
