@@ -7,7 +7,7 @@ import dogIcon from '@iconify-icons/fa-solid/dog';
 import trashAlt from '@iconify-icons/fa-solid/trash-alt';
 
 import Light from './components/cards/light.svelte';
-import Scene from './components/cards/scene.svelte';
+import Scene from './components/cards/button.svelte';
 import Break from './components/cards/break.svelte';
 
 export const weather = {

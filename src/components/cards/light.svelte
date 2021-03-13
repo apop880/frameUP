@@ -22,8 +22,8 @@
 
 <style>
     button {
-        width: 180px;
-        height: 70px;
+        width: 100%;
+        height: 100%;
         background-color: rgba(46, 45, 45, 0.825);
         color:white;
         border: 1 px grey solid;

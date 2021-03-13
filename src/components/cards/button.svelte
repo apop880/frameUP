@@ -8,7 +8,7 @@
     export let delay;
 </script>
 
-<button on:click="{() => action('scene.activate', config.scene)}"
+<button on:click="{() => action(config.action, config.scene)}"
     transition:fly="{{ y: 80, duration: 700, delay: delay, easing: elasticInOut }}">
         <div class="icon"><IconifyIcon icon="{config.icon}" height="38" /></div>
         <div class="name">{config.name}</div>    
@@ -16,8 +16,8 @@
 
 <style>
     button {
-        width: 180px;
-        height: 70px;
+        width: 100%;
+        height: 100%;
         background-color: rgba(216, 212, 212, 0.904);
         color:rgb(51, 51, 51);
         border: 1 px grey solid;
