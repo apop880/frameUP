@@ -4,20 +4,22 @@
     import { fly } from 'svelte/transition';
     import { elasticInOut } from 'svelte/easing'
 
-    export let config;
-    export let delay;
+    export let dataItem;
 
     let entityObj;
 
     $: {
-        entityObj = Object.values($stateStore).filter(value => (value.entity_id === config.entity))[0];
+        entityObj = Object.values($stateStore).filter(value => (value.entity_id === dataItem.entity))[0];
     }
 </script>
 
-<button class:on={entityObj.state === "on"} class:off={entityObj.state === "off"} on:click="{() => action('light.toggle', config.entity)}"
-    transition:fly="{{ y: 80, duration: 700, delay: delay, easing: elasticInOut }}">
-        <div class="icon"><IconifyIcon icon="{config.icon}" height="38" /></div>
-        <div class="name">{config.name}</div>    
+<button class:on={entityObj.state === "on"} class:off={entityObj.state === "off"} on:click="{() => action('light.toggle', dataItem.entity)}">
+        <div class="icon">
+            
+            <!-- <IconifyIcon icon="{icon}" height="38" /> -->
+            
+            a</div>
+        <div class="name">{dataItem.name}</div>    
 </button>
 
 <style>
