@@ -2,62 +2,57 @@
     import Grid from "svelte-grid";
     import gridHelp from "svelte-grid/build/helper/index.mjs";
 
+    import { fade } from 'svelte/transition';
+
     import Light from "./cards/light.svelte";
     import Button from "./cards/button.svelte";
 
     const { item } = gridHelp;
 
+    const cards = {
+        'light': Light,
+        'button': Button
+    };
+
     const id = () => "_" + Math.random().toString(36).substr(2, 9);
 
     let items = [
         {
-            id: id(),
-            5: item({
+            6: gridHelp.item({
                 x: 0,
                 y: 0,
                 w: 2,
                 h: 2,
             }),
-            3: item({ x: 0, w: 2, h: 2, y: 0 }),
-            1: item({ x: 0, y: 0, w: 1, h: 2 }),
+            id: id(),
+            card: 'light',
+            entity: 'light.theater',
+            name: 'Theater'
         },
 
         {
-            id: id(),
-            5: item({
+            6: gridHelp.item({
                 x: 2,
                 y: 0,
-                w: 3,
+                w: 2,
                 h: 2,
             }),
-            3: item({ x: 2, w: 1, h: 2, y: 0 }),
-            1: item({ x: 0, y: 2, w: 1, h: 2 }),
-        },
-
-        {
             id: id(),
-            5: item({
-                x: 0,
-                y: 2,
-                w: 5,
-                h: 2,
-            }),
-            3: item({ x: 0, w: 3, h: 2, y: 2 }),
-            1: item({ x: 0, y: 4, w: 1, h: 2 }),
+            card: 'light',
+            entity: 'light.bar_bulb',
+            name: 'Bar'
         },
     ];
 
     const cols = [
-        [1400, 5],
-        [800, 4],
-        [500, 1],
+        [1400, 6]
     ];
 </script>
 
-<div class="demo-container">
-    <Grid bind:items rowHeight={100} let:item {cols} let:index>
+<div class="demo-container" out:fade="{{ delay: 400 }}">
+    <Grid bind:items rowHeight={100} let:item {cols} let:index let:dataItem>
         <div class="demo-widget content">
-            <h3>{index}</h3>
+            <svelte:component this={cards[dataItem.card]} {dataItem} />
         </div>
     </Grid>
 </div>
