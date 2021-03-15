@@ -1,9 +1,24 @@
+<script>
+    import { onMount } from 'svelte';
+
+    let configList = [];
+
+    onMount(async () => {
+        //load in configs
+        const res = await fetch("/list_configs");
+        configList = await res.json();
+    });
+</script>
+
 <div class="modal">
     <div class="modal-content">
-        Connecting to Home Assistant... <br />
-        <div id="bar" class="indeterminate-progress-bar active">
-            <div class="progress-block single-segment" />
-        </div>
+        Choose an existing configuration to load:
+        <select>
+        {#each configList as config}
+            <option>{config}</option>
+        {/each}
+        </select>, or
+        <button>Create New</button>
     </div>
 </div>
 
