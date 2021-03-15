@@ -1,75 +1,37 @@
 <script>
-	import { stateStore, action } from './store.js'
-	import BackgroundSlideshow from './components/slideshow.svelte'
-	import Topbar from './components/topbar.svelte';
-	import Notifications from './components/notifications.svelte';
-	import Tasks from './components/tasks.svelte';
-	import LoadingModal from './components/loadingmodal.svelte';
-	import Menu from './components/menu.svelte';
-	import View from './components/view.svelte';
-	import { views } from './config.js';
+	import Edit from './Edit.svelte';
+	import Run from './Run.svelte';
+	import { onMount } from 'svelte';
 
-	let curView = null;
-	let showMenu = false;
-	let timer;
+	let config;
+	let editor = true;
 
-	function mainClick() {
-		clearTimeout(timer);
-		showMenu = true;
-		timer = setTimeout(() => {
-			showMenu = false;
-			curView = null;
-		}, 30000)
-	}
-
-	function handleMessage(e) {
-		clearTimeout(timer);
-		if(curView === e.detail.newView) {
-			curView = null;
-			timer = setTimeout(() => showMenu = false, 3000)
+	onMount(async () => {
+		//has this device gotten a named config yet?
+		const configName = localStorage.getItem('configName');
+		if (configName) {
+			//load in config
+			const res = await fetch('/get_config', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: {"name": configName}
+			})
+			config = await res.json();
 		}
 		else {
-			timer = setTimeout(() => {
-				showMenu = false;
-				curView = null;
-			}, 30000)
-			curView = e.detail.newView;
+			editor = true;
 		}
-	}
+	});
 </script>
 
-<main on:click="{() => mainClick()}">
-	<Topbar />
-	{#if curView !== null}
-		<View />
-	{/if}
-</main>
-{#if $stateStore !== null}
-	<Notifications />
-	<Tasks />
-	{#if showMenu}
-		<Menu on:message={handleMessage} curView={curView} />
-	{/if}
+<svelte:head>
+	<script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
+</svelte:head>
+
+{#if editor}
+<Edit />
 {:else}
-	<LoadingModal />
+<Run />
 {/if}
-<BackgroundSlideshow />
-
-<style>
-	:global(body) {
-		background-color: rgb(51, 51, 51);
-		overflow-y: hidden;
-	}
-
-	main {
-		display: grid;
-		grid-template-columns: 1fr;
-		grid-template-rows: 80px 1fr 100px;
-		gap: 0px 0px;
-		grid-template-areas:
-			"."
-			"."
-			".";
-		height: 100vh;
-	}
-</style>
