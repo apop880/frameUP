@@ -1,5 +1,5 @@
 <script>
-    import { stateStore, action } from '../../store.js';
+    import { stateStore, action } from '../../apistore.js';
 
     export let dataItem;
 

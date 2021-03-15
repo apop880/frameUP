@@ -1,5 +1,5 @@
 <script>
-    import { stateStore } from '../store.js';
+    import { stateStore } from '../apistore.js';
     import { flip } from 'svelte/animate';
     import { backIn } from 'svelte/easing';
     import CurrentWeather from './currentweather.svelte';

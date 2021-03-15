@@ -1,5 +1,5 @@
 <script>
-	import { stateStore, action } from './store.js'
+	import { stateStore, action } from './apistore.js'
 	import BackgroundSlideshow from './components/slideshow.svelte'
 	import Topbar from './components/topbar.svelte';
 	import Notifications from './components/notifications.svelte';
@@ -8,6 +8,8 @@
 	import Menu from './components/menu.svelte';
 	import View from './components/view.svelte';
 	import { views } from './config.js';
+
+	export let config;
 
 	let curView = null;
 	let showMenu = false;

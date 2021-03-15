@@ -1,5 +1,5 @@
 <script>
-    import { stateStore, action } from '../store.js';
+    import { stateStore, action } from '../apistore.js';
     import { notifications } from '../config.js';
     import { fly, fade } from 'svelte/transition';
     import { flip } from 'svelte/animate';

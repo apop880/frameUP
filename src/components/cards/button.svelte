@@ -1,5 +1,5 @@
 <script>
-    import { action } from '../../store.js';
+    import { action } from '../../apistore.js';
 
     export let dataItem;
 </script>

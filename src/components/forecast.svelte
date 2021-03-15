@@ -1,5 +1,5 @@
 <script>
-    import { stateStore } from '../store.js';
+    import { stateStore } from '../apistore.js';
     import { weather } from "../config.js";
     import '../css/weather-icons.min.css';
     import { fly, fade } from 'svelte/transition';
