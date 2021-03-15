@@ -20,7 +20,7 @@
         padding: 10px;
         margin-top: 10px;
         display: grid;
-        grid-template-columns: min-content 1fr;
+        grid-template-columns: 80px 1fr;
         grid-template-areas:
             "icon name";
         align-self: center;
