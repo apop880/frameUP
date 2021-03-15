@@ -27,7 +27,8 @@
             id: id(),
             card: 'light',
             entity: 'light.theater',
-            name: 'Theater'
+            name: 'Theater',
+            icon: 'ri:lightbulb-line'
         },
 
         {
@@ -40,7 +41,8 @@
             id: id(),
             card: 'light',
             entity: 'light.bar_bulb',
-            name: 'Bar'
+            name: 'Bar',
+            icon: 'ri:lightbulb-line'
         },
     ];
 
@@ -71,6 +73,5 @@
         max-width: 1400px;
         width: 100%;
         justify-self: center;
-        overflow-y: scroll;
     }
 </style>

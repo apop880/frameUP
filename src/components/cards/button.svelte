@@ -1,17 +1,12 @@
 <script>
     import { action } from '../../store.js';
-    import IconifyIcon from '@iconify/svelte';
-    import { fly } from 'svelte/transition';
-    import { elasticInOut } from 'svelte/easing'
 
-    export let config;
-    export let delay;
+    export let dataItem;
 </script>
 
-<button on:click="{() => action(config.action, config.scene)}"
-    transition:fly="{{ y: 80, duration: 700, delay: delay, easing: elasticInOut }}">
-        <div class="icon"><IconifyIcon icon="{config.icon}" height="38" /></div>
-        <div class="name">{config.name}</div>    
+<button on:click="{() => action('light.toggle', dataItem.entity)}">
+        <div class="icon"><span class="iconify" data-icon={dataItem.icon}></span></div>
+        <div class="name">{dataItem.name}</div>    
 </button>
 
 <style>

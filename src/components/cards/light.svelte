@@ -1,8 +1,5 @@
 <script>
     import { stateStore, action } from '../../store.js';
-    import IconifyIcon from '@iconify/svelte';
-    import { fly } from 'svelte/transition';
-    import { elasticInOut } from 'svelte/easing'
 
     export let dataItem;
 
@@ -15,10 +12,8 @@
 
 <button class:on={entityObj.state === "on"} class:off={entityObj.state === "off"} on:click="{() => action('light.toggle', dataItem.entity)}">
         <div class="icon">
-            
-            <!-- <IconifyIcon icon="{icon}" height="38" /> -->
-            
-            a</div>
+            <span class="iconify" data-icon={dataItem.icon}></span>
+        </div>
         <div class="name">{dataItem.name}</div>    
 </button>
 
