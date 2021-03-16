@@ -1,20 +1,14 @@
 <script>
 	import Edit from './Edit.svelte';
 	import Run from './Run.svelte';
-	import configstore from './configstore.js';
-
-	let editor = true;
-
-	$: if(configstore.name) {
-		editor = false;
-	}
+	import { configStore } from './configstore.js';
 </script>
 
 <svelte:head>
 	<script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
 </svelte:head>
 
-{#if editor}
+{#if $configStore.mode === "edit"}
 <Edit />
 {:else}
 <Run />

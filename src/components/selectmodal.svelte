@@ -1,6 +1,6 @@
 <script>
     import { onMount, createEventDispatcher } from 'svelte';
-    import configstore from '../configstore.js'
+    import { configStore, loadConfig } from '../configstore.js'
 
     let configList = [];
     let selectedConfig;
@@ -19,7 +19,7 @@
 
     function handleLoad() {
         localStorage.setItem('configName', selectedConfig);
-        configstore.loadConfig(selectedConfig);
+        loadConfig(selectedConfig);
         dispatch('message', {
 			text: 'close'
 		});
@@ -27,7 +27,7 @@
 
     function handleCreate() {
         localStorage.setItem('configName', newConfig);
-        configstore.updateConfig(newConfig, []);
+        configStore.setName(newConfig);
     }
 </script>
 

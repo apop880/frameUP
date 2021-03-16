@@ -1,7 +1,8 @@
 <script>
     import { onMount } from "svelte";
-    import configstore from './configstore.js';
+    import { configStore } from './configstore.js';
     import SelectModal from './components/selectmodal.svelte';
+    import { weather } from "./config.js";
 
     let configList = [];
 
@@ -14,11 +15,17 @@
     }
 </script>
 
-{#if (!($configstore.name) || loadNew)}
+{#if ($configStore.name === '' || loadNew)}
 <SelectModal />
 {:else}
 <main>
     <div class="edit" />
+    <form>
+    <h3>Weather</h3>
+        <!-- svelte-ignore a11y-label-has-associated-control -->
+        <label>Temperature Sensor</label>
+        <input type="text" bind:value={$configStore.data.weather.temperature_sensor} />
+    </form>
     <div class="nav" />
 </main>
 {/if}
