@@ -1,24 +1,47 @@
 <script>
-    import { onMount } from 'svelte';
+    import { onMount, createEventDispatcher } from 'svelte';
+    import configstore from '../configstore.js'
 
     let configList = [];
+    let selectedConfig;
+    let newConfig = "New Config Name";
 
     onMount(async () => {
         //load in configs
         const res = await fetch("/list_configs");
         configList = await res.json();
+        if (configList.length > 0) {
+            selectedConfig = configList[0];
+        }
     });
+
+    const dispatch = createEventDispatcher();
+
+    function handleLoad() {
+        localStorage.setItem('configName', selectedConfig);
+        configstore.loadConfig(selectedConfig);
+        dispatch('message', {
+			text: 'close'
+		});
+    }
+
+    function handleCreate() {
+        localStorage.setItem('configName', newConfig);
+        configstore.updateConfig(newConfig, []);
+    }
 </script>
 
 <div class="modal">
     <div class="modal-content">
         Choose an existing configuration to load:
-        <select>
+        <select bind:value={selectedConfig}>
         {#each configList as config}
-            <option>{config}</option>
+            <option value={config}>{config}</option>
         {/each}
-        </select>, or
-        <button>Create New</button>
+        </select> <button on:click={handleLoad}>Load</button>
+        <br />or
+        <input bind:value={newConfig} placeholder="New Config Name" />
+        <button on:click={handleCreate}>Create New</button>
     </div>
 </div>
 
@@ -47,82 +70,10 @@
         border-radius: 20px;
     }
 
-    .indeterminate-progress-bar,
-    .indeterminate-progress-bar > .progress-block {
-        border-style: solid;
-        border-width: 1px;
-        border-color: rgba(0, 0, 0, 0.25);
-
-        border-radius: 5px;
-    }
-
-    .indeterminate-progress-bar {
-        height: 25px;
-
-        margin: 0.5em;
-
-        background-color: rgb(214, 214, 214);
-
-        -webkit-box-shadow: 0px 0px 10px 0px rgba(50, 50, 50, 0.75);
-        -moz-box-shadow: 0px 0px 10px 0px rgba(50, 50, 50, 0.75);
-        box-shadow: 0px 0px 10px 0px rgba(50, 50, 50, 0.75);
-
-        overflow: hidden;
-    }
-
-    .indeterminate-progress-bar > .progress-block {
-        -webkit-animation-name: none;
-        -webkit-animation-duration: 2.5s;
-        -webkit-animation-timing-function: ease-in-out;
-        -webkit-animation-delay: 0s;
-        -webkit-animation-iteration-count: infinite;
-        -webkit-animation-direction: alternate;
-        -webkit-animation-play-state: paused;
-
-        animation-name: none;
-        animation-duration: 2.5s;
-        animation-timing-function: ease-in-out;
-        animation-delay: 0s;
-        animation-iteration-count: infinite;
-        animation-direction: alternate;
-        animation-play-state: paused;
-    }
-
-    .indeterminate-progress-bar.active > .progress-block {
-        -webkit-animation-name: bar-movement;
-        -webkit-animation-play-state: running;
-
-        animation-name: bar-movement;
-        animation-play-state: running;
-    }
-
-    @-webkit-keyframes bar-movement {
-        from {
-            left: -100px;
-        }
-        to {
-            left: calc(75% + 100px);
-        }
-    }
-
-    @keyframes bar-movement {
-        from {
-            left: -100px;
-        }
-        to {
-            left: calc(75% + 100px);
-        }
-    }
-
-    .progress-block {
-        position: relative;
-
-        top: -1px;
-        left: -1px;
-
-        width: 25%;
-        height: 100%;
-
-        background: rgb(54, 23, 168);
+    button {
+        border-radius: 20px;
+        color: white;
+        background-color: rgb(0, 106, 255);
+        border: none;
     }
 </style>
