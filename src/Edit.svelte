@@ -5,10 +5,16 @@
 
     let configList = [];
 
-    let load = false;
+    let loadNew = false;
+
+    function handleMessage(event) {
+        if(event.detail.text === 'close') {
+            loadNew = false;
+        }
+    }
 </script>
 
-{#if (!($configstore.name) || load)}
+{#if (!($configstore.name) || loadNew)}
 <SelectModal />
 {:else}
 <main>
