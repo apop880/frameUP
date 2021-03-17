@@ -1,4 +1,4 @@
-import { writable } from 'svelte/store';
+import { get, writable } from 'svelte/store';
 
 export const loadConfig = async (name) => {
 	const res = await fetch('/get_config', {
@@ -13,7 +13,25 @@ export const loadConfig = async (name) => {
 	configStore.setData(config);
 }
 
-//createConfig
+export const createConfig = async () => {
+	const res = await fetch('/update_config', {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify({"name": get(configStore).name, "config": {}})
+	})
+}
+
+export const saveConfig = async () => {
+	const res = await fetch('/update_config', {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify({"name": configStore.name, "config": configStore.data})
+	})
+}
 
 const { subscribe, set, update } = writable({
 	"name": '',
@@ -26,19 +44,19 @@ export const configStore = {
 	set,
 	update,
 
-	setName: value => update(self => {
-		self.name = value;
-		return self;
+	setName: (value) => update(n => {
+		n.name = value
+		return n
 	}),
 
-	setData: value => update(self => {
-		self.data = value;
-		return self;
+	setData: (value) => update(n => {
+		n.data = value;
+		return n;
 	}),
 
-	setMode: value => update(self => {
-		self.mode = value;
-		return self;
+	setMode: (value) => update(n => {
+		n.mode = value;
+		return n;
 	})
 }
 
@@ -46,4 +64,5 @@ const configName = localStorage.getItem('configName');
 
 if(configName) {
 	loadConfig(configName);
+	configStore.setMode("view")
 }
