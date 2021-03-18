@@ -1,5 +1,6 @@
 <script>
     import { stateStore } from '../apistore.js';
+    import { configStore } from '../configstore.js';
     import { flip } from 'svelte/animate';
     import { backIn } from 'svelte/easing';
     import CurrentWeather from './currentweather.svelte';
@@ -7,16 +8,21 @@
     import '../css/weather-icons.min.css';
 
     const CONDITION_PICTURES = {
-        "clear-day": "wi-day-sunny",
-        "clear-night": "wi-night-clear",
-        "rain": "wi-rain",
-        "snow": "wi-snow",
-        "sleet": "wi-sleet",
-        "wind": "wi-cloudy-windy",
-        "fog": "wi-fog",
-        "cloudy": "wi-cloudy",
-        "partly-cloudy-day": "wi-day-cloudy",
-        "partly-cloudy-night": "wi-night-alt-cloudy"
+        "clear-night": "mdi:weather-night",
+        "cloudy": "mdi:weather-cloudy",
+        "fog": "mdi:weather-fog",
+        "hail": "mdi:weather-hail",
+        "lightning": "mdi:weather-lightning",
+        "lightning-rainy": "mdi:weather-lightning-rainy",
+        "partlycloudy": "mdi:weather-partly-cloudy",
+        "pouring": "mdi:weather-pouring",
+        "rainy": "mdi:weather-rainy",
+        "snowy": "mdi:weather-snowy",
+        "snowy-rainy": "mdi:weather-snowy-rainy",
+        "sunny": "mdi:weather-sunny",
+        "windy": "mdi:weather-windy",
+        "windy-variant": "mdi:weather-windy-variant",
+        "exceptional": "mdi:weather-sunny"
     }
 
     let componentArray = [
@@ -39,7 +45,7 @@
     }
 </script>
 
-{#if $stateStore !== null}
+{#if $stateStore !== null && $configStore.data.weather_entity !== ''}
 {#each componentArray as component, key(component)}
 <div animate:flip="{{duration: 400, easing: backIn}}" style="justify-self:end;">
 <svelte:component this={component} on:click="{() => toggleForecast()}" {CONDITION_PICTURES} />

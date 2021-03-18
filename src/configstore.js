@@ -8,19 +8,9 @@ export const loadConfig = async (name) => {
 		},
 		body: JSON.stringify({"name": name})
 	})
-	config = await res.json();
+	const config = await res.json();
 	configStore.setName(name);
 	configStore.setData(config);
-}
-
-export const createConfig = async () => {
-	const res = await fetch('/update_config', {
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/json'
-		},
-		body: JSON.stringify({"name": get(configStore).name, "config": {}})
-	})
 }
 
 export const saveConfig = async () => {
@@ -29,13 +19,15 @@ export const saveConfig = async () => {
 		headers: {
 			'Content-Type': 'application/json'
 		},
-		body: JSON.stringify({"name": configStore.name, "config": configStore.data})
+		body: JSON.stringify({"name": get(configStore).name, "config": get(configStore).data})
 	})
 }
 
 const { subscribe, set, update } = writable({
 	"name": '',
-	"data": {},
+	"data": {
+		"weather_entity": ''
+	},
 	"mode": "edit"
 });
 

@@ -1,5 +1,6 @@
 <script>
 	import { stateStore, action } from './apistore.js'
+	import { configStore } from './configstore.js';
 	import BackgroundSlideshow from './components/slideshow.svelte'
 	import Topbar from './components/topbar.svelte';
 	import Notifications from './components/notifications.svelte';
@@ -46,7 +47,7 @@
 		<View />
 	{/if}
 </main>
-{#if $stateStore !== null}
+{#if $stateStore !== null && $configStore.data.weather_entity !== ''}
 	<Notifications />
 	<Tasks />
 	{#if showMenu}

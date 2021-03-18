@@ -14,9 +14,3 @@
 <Run />
 {/if}
 
-<style>
-	:global(.iconify) {
-        width: 80%;
-        height: 80%;
-    }
-</style>

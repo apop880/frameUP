@@ -1,8 +1,7 @@
 <script>
     import { stateStore } from '../apistore.js';
-    import { weather } from "../config.js";
-    import '../css/weather-icons.min.css';
-    import { fly, fade } from 'svelte/transition';
+    import { configStore } from '../configstore.js';
+    import { fly } from 'svelte/transition';
     export let CONDITION_PICTURES;
 
     const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
@@ -18,10 +17,10 @@
 </script>
 
 <div class="weather-extended" on:click in:fly="{{ y: -200, duration: 500, delay: 750 }}" out:fly="{{ y: -200, duration: 500 }}">
-    {#each weather.forecast as day, key}
-        <div>{getDay(key)}</div>
-        <div><i class={'wi ' + CONDITION_PICTURES[$stateStore[day.icon].state]}/></div>
-        <div>{roundTemp($stateStore[day.high].state)}&deg; / {roundTemp($stateStore[day.low].state)}&deg;</div>
+    {#each Array(3) as _, row}
+        <div>{getDay(row)}</div>
+        <div><span class="iconify" data-icon={CONDITION_PICTURES[$stateStore[$configStore.data.weather_entity].attributes.forecast[row].condition]}></span></div>
+        <div>{roundTemp($stateStore[$configStore.data.weather_entity].attributes.forecast[row].temperature)}&deg; / {roundTemp($stateStore[$configStore.data.weather_entity].attributes.forecast[row].templow)}&deg;</div>
     {/each}
 </div>
 
