@@ -8,6 +8,9 @@
     let imgB = ''
     let showA = true;
 
+    let rotator;
+    let delay;
+
     onMount(() => {
         fetch('slideshow.json')
             .then(Response => Response.json())
@@ -17,14 +20,14 @@
                 imgB = images[1];
             })
 
-        const rotator = setInterval(() => {
+        rotator = setInterval(() => {
             if(showA) {
                 showA = !showA;
-                setTimeout(() => { imgA = images[x]; }, 5000)
+                delay = setTimeout(() => { imgA = images[x]; }, 5000)
             }
             else {
                 showA = !showA;
-                setTimeout(() => { imgB = images[x]; }, 5000)
+                delay = setTimeout(() => { imgB = images[x]; }, 5000)
             }
             x++;
             if(x > images.length-1) {
@@ -35,6 +38,7 @@
 
     onDestroy(() => {
         clearInterval(rotator);
+        clearTimeout(delay);
     })
 </script>
 

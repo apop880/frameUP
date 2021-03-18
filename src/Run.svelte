@@ -1,6 +1,6 @@
 <script>
-	import { stateStore, action } from './apistore.js'
-	import { configStore } from './configstore.js';
+	import { stateStore, action } from './apistore.js';
+	import { onDestroy } from 'svelte';
 	import BackgroundSlideshow from './components/slideshow.svelte'
 	import Topbar from './components/topbar.svelte';
 	import Notifications from './components/notifications.svelte';
@@ -10,11 +10,14 @@
 	import View from './components/view.svelte';
 	import { views } from './config.js';
 
-	export let config;
+	export let curView;
 
-	let curView = null;
 	let showMenu = false;
 	let timer;
+
+	onDestroy(() => {
+        clearTimeout(timer);
+    })
 
 	function mainClick() {
 		clearTimeout(timer);
@@ -47,7 +50,7 @@
 		<View />
 	{/if}
 </main>
-{#if $stateStore !== null && $configStore.data.weather_entity !== ''}
+{#if $stateStore !== null}
 	<Notifications />
 	<Tasks />
 	{#if showMenu}

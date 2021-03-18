@@ -1,6 +1,7 @@
 <script>
     import { stateStore } from '../apistore.js';
     import { configStore } from '../configstore.js';
+    import { onDestroy } from 'svelte';
     import { flip } from 'svelte/animate';
     import { backIn } from 'svelte/easing';
     import CurrentWeather from './currentweather.svelte';
@@ -30,6 +31,10 @@
     ]
 
     let timer;
+
+    onDestroy(() => {
+        clearTimeout(timer);
+    })
 
     function toggleForecast() {
         clearTimeout(timer);

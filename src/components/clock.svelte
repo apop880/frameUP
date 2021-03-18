@@ -3,9 +3,10 @@
 
     let time = new Array(2);
     let date;
+    let timer;
 
     onMount(() => {
-        const timer = setInterval(
+        timer = setInterval(
             () => {
                 let dateObj = new Date();
                 time = dateObj.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' }).split(' ');
