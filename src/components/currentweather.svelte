@@ -1,11 +1,15 @@
 <script>
     import { stateStore } from '../apistore.js';
     import { configStore } from '../configstore.js';
+
+    function roundTemp(val) {
+        return Math.round(val);
+    }
 </script>
 
 <div class="weather" on:click>
     <span class="iconify" data-icon={$stateStore[$configStore.data.weather_entity].attributes.icon}></span>
-    {$stateStore[$configStore.data.weather_entity].attributes.temperature}&deg;
+    {roundTemp($stateStore[$configStore.data.weather_entity].attributes.temperature)}&deg;
 </div>
 
 <style>
