@@ -13,8 +13,9 @@ def read_json(path):
     with open(path) as file_in:
         return json.load(file_in)
 
+@app.route('/')
 @app.route('/<path:path>')
-def index(path):
+def index(path='index.html'):
     return send_from_directory('../public', path)
 
 @app.route('/list_configs')
