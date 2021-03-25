@@ -1,14 +1,13 @@
 <script>
-	import { stateStore, action } from './apistore.js';
+	import { stateStore } from './apistore.js';
 	import { onDestroy } from 'svelte';
 	import BackgroundSlideshow from './components/slideshow.svelte'
 	import Topbar from './components/topbar.svelte';
-	import Notifications from './components/notifications.svelte';
+	import Monitor from './components/monitor.svelte';
 	import Tasks from './components/tasks.svelte';
 	import LoadingModal from './components/loadingmodal.svelte';
 	import Menu from './components/menu.svelte';
 	import View from './components/view.svelte';
-	import { views } from './config.js';
 
 	export let curView;
 
@@ -51,7 +50,7 @@
 	{/if}
 </main>
 {#if $stateStore !== null}
-	<Notifications />
+	<Monitor />
 	<Tasks />
 	{#if showMenu}
 		<Menu on:message={handleMessage} curView={curView} />

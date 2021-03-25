@@ -26,7 +26,8 @@ export const saveConfig = async () => {
 const { subscribe, set, update } = writable({
 	"name": '',
 	"data": {
-		"weather_entity": ''
+		"weather_entity": '',
+		"sensors": []
 	},
 	"mode": "edit"
 });
